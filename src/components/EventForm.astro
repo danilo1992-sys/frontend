@@ -1,0 +1,117 @@
+---
+import TimelineSection from './TimelineSection.astro';
+
+interface Props {
+  event?: {
+    id?: number;
+    nombre: string;
+    fecha: string;
+    direccion: string;
+    descripcion?: string;
+    actividades?: { hora: string; actividad: string }[];
+  };
+}
+
+const { event } = Astro.props;
+const isEditing = !!event?.id;
+---
+
+<form class="flex flex-col gap-6 max-w-md mx-auto" id="eventForm" data-id={event?.id}>
+  <div class="flex flex-col gap-2">
+    <label for="nombre" class="font-semibold text-[--spotify-green]">Nombre del evento</label>
+    <input 
+      type="text" 
+      id="nombre" 
+      name="nombre" 
+      value={event?.nombre || ''}
+      placeholder="Ingresa el nombre del evento"
+      required
+      class="p-3 border-2 border-[--spotify-green] rounded-lg bg-[--spotify-dark] text-white focus:outline-none focus:border-[#1db954] focus:ring-4 focus:ring-[rgba(29,185,84,0.2)]"
+    />
+  </div>
+
+  <div class="flex flex-col gap-2">
+    <label for="fecha" class="font-semibold text-[--spotify-green]">Fecha</label>
+    <input 
+      type="date" 
+      id="fecha" 
+      name="fecha" 
+      value={event?.fecha || ''}
+      required
+      class="p-3 border-2 border-[--spotify-green] rounded-lg bg-[--spotify-dark] text-white focus:outline-none focus:border-[#1db954] focus:ring-4 focus:ring-[rgba(29,185,84,0.2)]"
+    />
+  </div>
+
+  <div class="flex flex-col gap-2">
+    <label for="direccion" class="font-semibold text-[--spotify-green]">Dirección</label>
+    <input 
+      type="text" 
+      id="direccion" 
+      name="direccion" 
+      value={event?.direccion || ''}
+      placeholder="Ingresa la dirección"
+      required
+      class="p-3 border-2 border-[--spotify-green] rounded-lg bg-[--spotify-dark] text-white focus:outline-none focus:border-[#1db954] focus:ring-4 focus:ring-[rgba(29,185,84,0.2)]"
+    />
+  </div>
+
+  <div class="flex flex-col gap-2">
+    <label for="descripcion" class="font-semibold text-[--spotify-green]">Descripción</label>
+    <textarea 
+      id="descripcion" 
+      name="descripcion" 
+      rows="4"
+      placeholder="Describe el evento..."
+      class="p-3 border-2 border-[--spotify-green] rounded-lg bg-[--spotify-dark] text-white resize-y focus:outline-none focus:border-[#1db954] focus:ring-4 focus:ring-[rgba(29,185,84,0.2)]"
+    >{event?.descripcion || ''}</textarea>
+  </div>
+
+  <TimelineSection actividades={event?.actividades} />
+
+  <div class="flex gap-4 mt-4">
+    <button type="submit" class="px-6 py-3 rounded-lg font-semibold text-center no-underline bg-[--spotify-green] text-black hover:bg-[#1ed760]">
+      {isEditing ? 'Actualizar evento' : 'Crear evento'}
+    </button>
+    <a href="/" class="px-6 py-3 rounded-lg font-semibold text-center no-underline border-2 border-[--spotify-gray] text-[--spotify-gray] hover:border-white hover:text-white">
+      Cancelar
+    </a>
+  </div>
+</form>
+
+<script>
+  const form = document.getElementById('eventForm') as HTMLFormElement;
+  const eventId = form?.dataset.id;
+  
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(form);
+    const data = {
+      nombre: formData.get('nombre'),
+      fecha: formData.get('fecha'),
+      direccion: formData.get('direccion'),
+      descripcion: formData.get('descripcion'),
+    };
+
+    try {
+      const method = eventId ? 'PUT' : 'POST';
+      const url = eventId ? `http://localhost:3000/eventos/${eventId}` : 'http://localhost:3000/eventos';
+      
+      const response = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        window.location.href = '/';
+      } else {
+        const errorData = await response.json();
+        alert('Error al guardar: ' + (errorData.message || 'Error desconocido'));
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error de conexión con el servidor');
+    }
+  });
+</script>

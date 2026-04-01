@@ -1,0 +1,23 @@
+---
+import Getevents from '../api/getevents.ts'
+import { formatDate } from '../utils/formatDate.ts'
+const events = await Getevents()
+import Badge from "./Badge.astro"
+import Trash from "./icons/Trash.astro"
+---
+
+<div class="flex flex-col gap-3">
+  {events.map((e: any) => (
+    <a href="/evento" class="w-full mt-6 cursor-pointer block border-2 rounded-lg p-4 flex flex-col justify-between" style="border-color: var(--spotify-green); background-color: var(--spotify-dark); color: white; min-height: 120px;">
+      <div>
+        <h5 class="mb-2.5 font-bold" style="color: var(--spotify-green);">{e.nombre}</h5>
+        <p class="text-sm" style="color: var(--spotify-gray);">{formatDate(e.fecha)}</p>
+        <p class="text-sm" style="color: var(--spotify-gray);">{e.direccion}</p>
+      </div>
+      <div class="flex items-center justify-between mt-3">
+        <Badge id={e.id} />
+        <Trash id={e.id} />
+      </div>
+    </a>
+  ))}
+</div>

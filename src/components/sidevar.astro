@@ -1,0 +1,42 @@
+---
+const ITEMS = [
+  {
+    title:"Inicio",
+    label:"inicio",
+    url:"/"
+  },
+
+{
+    title:"Calendario",
+    label:"calendario",
+    url:"/calendario"
+  },
+{
+    title:"Perfil",
+    label:"Perfil",
+    url:"/perfil"
+  }
+] 
+
+import Button from'./Button.astro'
+---
+
+<button type="button" class="btn btn-text max-sm:btn-square sm:hidden" aria-haspopup="dialog" aria-expanded="false" aria-controls="scoped-sidebar" data-overlay="#scoped-sidebar" data-overlay-options='{ "backdropExtraClasses": "!absolute", "backdropParent": "#custom-backdrop-container" }'>
+  <span class="icon-[tabler--menu-2] size-5"></span>
+</button>
+
+<aside id="scoped-sidebar" class="overlay [--auto-close:sm] sm:shadow-none overlay-open:translate-x-0 drawer drawer-start hidden max-w-64 absolute z-1 sm:flex sm:translate-x-0 sm:sticky sm:top-0 sm:h-screen [--body-scroll:true]" style="background-color: var(--spotify-black);" role="dialog" tabindex="-1">
+  <div class="drawer-body px-2 pt-4">
+    <ul class="menu p-0">
+      {ITEMS.map (items => (
+      <li>
+        <a href={items.url} style="color: white;" onmouseover="this.style.backgroundColor='var(--spotify-green)'" onmouseout="this.style.backgroundColor='transparent'">
+          <span class="icon-[tabler--home] size-5"></span>
+        {items.title}
+        </a>
+      </li>
+      ))}
+  <Button/>
+    </ul>
+  </div>
+</aside>

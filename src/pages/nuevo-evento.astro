@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import EventForm from '../components/EventForm.astro';
+import Sidebar from '../components/sidevar.astro';
+---
+
+<Layout>
+  <div class="flex">
+    <Sidebar />
+    <div class="flex-1 p-6">
+      <div class="form-container">
+        <h1 class="form-title">Nuevo Evento</h1>
+        <EventForm />
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .form-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .form-title {
+    color: var(--spotify-green);
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+</style>
