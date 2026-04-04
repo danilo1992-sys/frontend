@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function Button({ children, href, variant = 'primary', className = '' }) {
   const baseClasses = 'font-semibold px-6 py-2 rounded-lg transition-colors';
   
