@@ -1,19 +1,14 @@
 ---
-import Sidebar from '../components/sidevar.astro';
-import Card from '../components/Card.astro';
-import Button from '../components/Button.astro';
+import Sidebar from '../components/Sidebar.jsx';
+import Card from '../components/Card.jsx';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
   <div class="flex">
-    <Sidebar />
+    <Sidebar client:load />
     <div class="flex-1 p-6">
-      <Button />
-      <Card />
+      <Card client:load />
     </div>
   </div>
 </Layout>

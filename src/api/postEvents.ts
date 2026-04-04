@@ -1,1 +1,1 @@
-import type { APIRoute } from "astro";
+export type { APIRoute } from "astro";

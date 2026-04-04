@@ -12,11 +12,17 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/react": "^5.0.2",
     "@formkit/tempo": "^1.0.0",
     "@tailwindcss/vite": "^4.2.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "astro": "^6.1.2",
     "date-fns": "^4.1.0",
-    "tailwindcss": "^4.2.2"
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "tailwindcss": "^4.2.2",
+    "zustand": "^5.0.12"
   },
   "devDependencies": {
     "flyonui": "^2.4.1"

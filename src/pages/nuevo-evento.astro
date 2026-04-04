@@ -1,30 +1,17 @@
 ---
+import Sidebar from '../components/Sidebar.jsx';
+import EventForm from '../components/EventForm.jsx';
 import Layout from '../layouts/Layout.astro';
-import EventForm from '../components/EventForm.astro';
-import Sidebar from '../components/sidevar.astro';
 ---
 
 <Layout>
   <div class="flex">
-    <Sidebar />
+    <Sidebar client:load />
     <div class="flex-1 p-6">
-      <div class="form-container">
-        <h1 class="form-title">Nuevo Evento</h1>
-        <EventForm />
+      <div style="max-width: 600px; margin: 0 auto;">
+        <h1 style="color: var(--spotify-green); margin-bottom: 2rem; text-align: center;">Nuevo Evento</h1>
+        <EventForm client:load />
       </div>
     </div>
   </div>
 </Layout>
-
-<style>
-  .form-container {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  .form-title {
-    color: var(--spotify-green);
-    margin-bottom: 2rem;
-    text-align: center;
-  }
-</style>
