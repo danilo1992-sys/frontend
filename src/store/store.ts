@@ -1,18 +1,14 @@
 import { create } from "zustand";
+import type { FormStoreState, DeleteStoreState, PageState } from "./types";
 
-type PageState = false;
-
-interface StoreState {
-  pageState: PageState;
-  setPageState: (state: PageState) => void;
-}
-
-export const FormStore = create<StoreState>((set) => ({
-  pageState: false,
-  setPageState: (state) => set({ pageState: state }),
+export const FormStore = create<FormStoreState>((set) => ({
+  pageState: true,
+  setPageState: (state: PageState) => set({ pageState: state }),
+  isSaving: false,
+  setIsSaving: (state: boolean) => set({ isSaving: state })
 }));
 
-export const DeleteStore = create<StoreState>((set) => ({
+export const DeleteStore = create<DeleteStoreState>((set) => ({
   pageState: false,
   setPageState: (state) => set({ pageState: state }),
 }));

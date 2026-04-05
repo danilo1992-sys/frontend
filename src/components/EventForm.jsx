@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import TimelineSection from './TimelineSection';
 import Spinner from './Spinner';
+import { FormStore } from '../store/store'
 
 const EventForm = ({ event }) => {
   const [formData, setFormData] = useState({
@@ -10,8 +11,9 @@ const EventForm = ({ event }) => {
     descripcion: event?.descripcion || '',
   });
 
-  const [isLoading, setIsLoading] = useState(false);
   const [actividades, setActividades] = useState(event?.actividades || []);
+  const isSaving = FormStore(state => state.isSaving);
+  const setIsSaving = FormStore(state => state.setIsSaving);
 
   const isEditing = !!event?.id;
 
@@ -25,7 +27,7 @@ const EventForm = ({ event }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    setIsSaving(true);
 
     try {
       const method = isEditing ? 'PUT' : 'POST';
@@ -40,21 +42,28 @@ const EventForm = ({ event }) => {
       });
 
       if (response.ok) {
-        window.location.href = '/';
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 2000);
       } else {
         const errorData = await response.json();
         alert('Error al guardar: ' + (errorData.message || 'Error desconocido'));
+        setIsSaving(false);
       }
     } catch (error) {
       console.error('Error:', error);
       alert('Error de conexión con el servidor');
-    } finally {
-      setIsLoading(false);
+      setIsSaving(false);
     }
   };
 
   return (
     <>
+      {isSaving && (
+        <div className="fixed inset-0 flex flex-col items-center justify-center bg-black/70 z-50">
+          <Spinner />
+        </div>
+      )}
       <form 
         onSubmit={handleSubmit} 
         className="flex flex-col gap-6 max-w-md mx-auto"
@@ -126,7 +135,7 @@ const EventForm = ({ event }) => {
         <div className="flex gap-4 mt-4">
           <button
             type="submit"
-            disabled={isLoading}
+            disabled={isSaving}
             className="px-6 py-3 rounded-lg font-semibold text-center no-underline bg-[--spotify-green] text-black hover:bg-[#1ed760] disabled:opacity-50 border-white text-white border-2 hover:text-black cursor-pointer"
           >Nuevo Evento
           </button>
@@ -138,7 +147,6 @@ const EventForm = ({ event }) => {
           </a>
         </div>
       </form>
-      <Spinner />
     </>
   );
 };

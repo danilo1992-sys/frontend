@@ -1,8 +1,10 @@
-import React from 'react';
-
 const Spinner = () => {
   return (
-    <span className="loading loading-spinner loading-sm"></span>
+    <button class="btn btn-primary btn-square btn-disabled" aria-label="Loading Button">
+      <span class="loading loading-spinner loading-sm">
+        Guardando evento...
+      </span>
+    </button>
   );
 };
 

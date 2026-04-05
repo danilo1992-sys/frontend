@@ -2,6 +2,8 @@
 import Sidebar from '../components/Sidebar.jsx';
 import EventForm from '../components/EventForm.jsx';
 import Layout from '../layouts/Layout.astro';
+import Spinner from '../components/Spinner';
+
 ---
 
 <Layout>
@@ -10,7 +12,8 @@ import Layout from '../layouts/Layout.astro';
     <div class="flex-1 p-6">
       <div style="max-width: 600px; margin: 0 auto;">
         <h1 style="color: var(--spotify-green); margin-bottom: 2rem; text-align: center;">Nuevo Evento</h1>
-        <EventForm client:load />
+        <Spinner client:load />
+        <EventForm client:only="react" />
       </div>
     </div>
   </div>
