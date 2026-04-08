@@ -1,0 +1,39 @@
+---
+const { headers, data } = Astro.props;
+
+function formatTime(timestamp) {
+  return new Date(timestamp).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+}
+---
+
+<table class="w-full border-collapse">
+  <thead>
+    <tr class="border-b" style="border-color: var(--spotify-light-gray)">
+      {headers.map((header) => (
+        <th
+          class="text-left py-2 font-semibold w-1/2"
+          style={`color: ${header.color || 'var(--spotify-gray)'}`}
+        >
+          {header.label}
+        </th>
+      ))}
+    </tr>
+  </thead>
+  <tbody>
+    {data.map((row) => (
+      <tr
+        class="border-b transition-colors hover:bg-[--spotify-dark]"
+        style="border-color: var(--spotify-light-gray)"
+      >
+        {headers.map((header) => (
+          <td
+            class="py-2 w-1/2"
+            style={`color: ${header.color || 'white'}`}
+          >
+            {header.type === 'time' ? formatTime(row[header.key]) : row[header.key]}
+          </td>
+        ))}
+      </tr>
+    ))}
+  </tbody>
+</table>

@@ -42,8 +42,8 @@ export default function Card() {
       {events.map((e) => (
         <a 
           key={e.id} 
-          href="/evento" 
-          className="w-full mt-6 cursor-pointer block border-2 rounded-lg p-4 flex flex-col justify-between" 
+          href={`/evento/${e.id}`}
+          className="w-full mt-6 cursor-pointer border-2 rounded-lg p-4 flex flex-col justify-between" 
           style={{ borderColor: 'var(--spotify-green)', backgroundColor: 'var(--spotify-dark)', color: 'white', minHeight: '120px' }}
         >
           <div>

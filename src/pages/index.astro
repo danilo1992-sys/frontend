@@ -1,15 +1,9 @@
 ---
-import Sidebar from '../components/Sidebar.jsx';
 import Card from '../components/Card.jsx';
 import Layout from '../layouts/Layout.astro';
 
 ---
 
 <Layout>
-  <div class="flex">
-    <Sidebar client:load />
-    <div class="flex-1 p-6">
-      <Card client:load />
-    </div>
-  </div>
+  <Card client:load />
 </Layout>

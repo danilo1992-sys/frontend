@@ -17,7 +17,7 @@ export default function Sidebar() {
           {ITEMS.map((item, index) => (
             <li 
               key={index} 
-              className='py-2 mb-2 border-solid border-white border-2 rounded-lg text-center cursor-pointer text-center'
+              className='py-2 mb-2 border-solid border-white border-2 rounded-lg text-center cursor-pointer'
               onClick={() => window.location.href = item.url}
               onMouseOver={(e) => {
                 e.currentTarget.style.backgroundColor = 'var(--spotify-green)';

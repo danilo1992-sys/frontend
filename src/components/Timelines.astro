@@ -1,0 +1,28 @@
+---
+import { getAllEvents } from '../api/eventsApi';
+const events = await getAllEvents();
+const timeline = events[0]?.timeline || [];
+
+---
+
+<div class="w-full max-w-md">
+  <div class="space-y-0 p-6">
+    {timeline.map((item) => (
+      <div class="flex items-start group">
+        <span class="w-20 text-right font-bold pt-1.5 pr-6 shrink-0" style="color: var(--spotify-gray)">
+          {new Date(item.hora).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}
+        </span>
+
+        <div class="relative border-l-2 pl-8 pb-8" style="border-color: var(--spotify-light-gray)">
+          <div class="absolute top-2 -left-2.25 h-4 w-4 rounded-full border-2 z-10" style="background-color: var(--spotify-green); border-color: var(--spotify-green); box-shadow: 0 0 10px var(--spotify-green)"></div>
+
+          <div class="rounded shadow-sm group-hover:opacity-80 transition-opacity" style="background-color: var(--spotify-dark); border: 1px solid var(--spotify-light-gray)">
+            <p class="font-bold px-4 py-1.5" style="color: var(--spotify-green)">{item.actividad}</p>
+            <p class="text-sm px-4 pb-1.5" style="color: var(--spotify-gray)">{item.descripcion}</p>
+            <span class="text-xs px-4 pb-1.5 inline-block capitalize" style="color: var(--spotify-gray)">{item.tipo}</span>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>

@@ -1,0 +1,63 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import { formatDate } from '../../utils/formatDate'
+import { getEventById } from '../../api/eventsApi'
+import Timeline from '../../components/Timelines.astro'
+import Divider from '../../components/Divider'
+import Table from '../../components/Table.astro'
+
+const { id } = Astro.params;
+const event = id ? await getEventById(id) : null;
+
+const preferenciaHeaders = [
+  { key: 'nombre', label: 'Nombre' },
+  { key: 'timestamp', label: 'Hora', color: 'var(--spotify-gray)', type: 'time' },
+]
+
+const playlistHeaders = [
+  { key: 'titulo', label: 'Titulo' },
+  { key: 'artista', label: 'Artista', color: 'var(--spotify-gray)' },
+]
+---
+
+<Layout>
+    <div class="w-full px-4 mt-4">
+    <div
+        class="p-6 bg-[--spotify-black] border-2 border-[--spotify-green] rounded-lg shadow-md w-full"
+    >
+        <h5
+            class="mb-2 text-2xl font-bold tracking-tight text-[ --spotify-gray]"
+        >
+            Informacion del evento
+        </h5>
+        {event ? (
+        <ul class="list-outside list-disc ms-4 grid grid-cols-2 gap-4">
+            <li class="mb-2">{event.nombre}</li>
+            <li class="mb-2">{event.direccion}</li>
+            <li class="mb-2">{event.fecha ? formatDate(event.fecha) : 'Sin fecha'}</li>
+        </ul>
+        ) : (
+        <p>Evento no encontrado</p>
+        )}
+    </div>
+    <div id="timeline">
+        <Divider client:load />
+        <Timeline />
+    </div>
+    <div id="preferencias">
+        <h2 class="text-xl font-bold text-[--spotify-green] mt-8 mb-4">Preferencias</h2>
+        {event?.preferencias?.length > 0 ? (
+            <Table headers={preferenciaHeaders} data={event.preferencias} />
+        ) : (
+            <p class="text-[--spotify-gray]">Sin preferencias registradas</p>
+        )}
+    </div>
+    <div id="playlists">
+        <h2 class="text-xl font-bold text-[--spotify-green] mt-8 mb-4">Playlists</h2>
+        {event?.playlistCliente?.length > 0 ? (
+            <Table headers={playlistHeaders} data={event.playlistCliente} />
+        ) : (
+            <p class="text-[--spotify-gray]">Sin canciones en la playlist</p>
+        )}
+    </div>
+</div>
