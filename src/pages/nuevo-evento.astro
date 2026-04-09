@@ -1,14 +1,12 @@
 ---
 import EventForm from '../components/EventForm.jsx';
 import Layout from '../layouts/Layout.astro';
-import Spinner from '../components/Spinner';
 
 ---
 
 <Layout>
   <div style="max-width: 600px; margin: 0 auto;">
     <h1 style="color: var(--spotify-green); margin-bottom: 2rem; text-align: center;">Nuevo Evento</h1>
-    <Spinner client:load />
     <EventForm client:load />
   </div>
 </Layout>

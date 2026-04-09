@@ -1,0 +1,14 @@
+---
+import SignedOut from "@clerk/astro";
+import AuthLayouts from "../layouts/AuthLayout.astro";
+---
+
+<AuthLayouts>
+    <SignedOut>
+        <div class="mt-12">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Iniciar sesión
+            </button>
+        </div>
+    </SignedOut>
+</AuthLayouts>

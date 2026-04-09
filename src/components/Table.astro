@@ -30,7 +30,7 @@ function formatTime(timestamp) {
             class="py-2 w-1/2"
             style={`color: ${header.color || 'white'}`}
           >
-            {header.type === 'time' ? formatTime(row[header.key]) : row[header.key]}
+            {header.type === 'time' ? formatTime(row[header.key]) : (typeof row[header.key] === 'object' ? (row[header.key]?.name || row[header.key]?.title || 'N/A') : row[header.key])}
           </td>
         ))}
       </tr>
