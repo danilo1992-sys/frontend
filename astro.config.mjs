@@ -7,7 +7,7 @@ import clerk from '@clerk/astro'
 
 export default defineConfig({
   output: 'server',
-  adapter: node({ mode: 'standalone' }),
+  adapter: node({ mode: 'standalone', host: '0.0.0.0' }),
   vite: {
     plugins: [tailwindcss()]
   },
