@@ -25,6 +25,10 @@ const EventForm = ({ event }) => {
     }));
   };
 
+  const handleActividadesChange = (newActividades) => {
+    setActividades(newActividades);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSaving(true);
@@ -32,13 +36,19 @@ const EventForm = ({ event }) => {
     try {
       const method = isEditing ? 'PUT' : 'POST';
       const url = isEditing 
-        ? `http://localhost:3000/eventos/${event?.id}` 
-        : 'http://localhost:3000/eventos';
+        ? `/api/eventos/${event?.id}` 
+        : '/api/eventos';
+
+      const payload = {
+        ...formData,
+        ...(!isEditing && { id: crypto.randomUUID() }),
+        actividades,
+      };
 
       const response = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
       if (response.ok) {
@@ -130,7 +140,7 @@ const EventForm = ({ event }) => {
           />
         </div>
 
-        <TimelineSection actividades={actividades} />
+        <TimelineSection actividades={actividades} onChange={handleActividadesChange} />
 
         <div className="flex gap-4 mt-4">
           <button

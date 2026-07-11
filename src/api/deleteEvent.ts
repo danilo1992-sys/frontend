@@ -1,4 +1,4 @@
-const url = "http://localhost:3000/eventos";
+const url = "/api/eventos";
 
 export async function deleteEvent(id: number) {
   try {

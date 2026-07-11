@@ -1,4 +1,5 @@
-const API_URL = "http://localhost:3000/eventos";
+const isServer = typeof window === 'undefined';
+const API_URL = isServer ? 'https://backend-he9t.onrender.com/eventos' : '/api/eventos';
 
 export async function getAllEvents() {
   const res = await fetch(API_URL);

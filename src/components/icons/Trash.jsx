@@ -7,7 +7,7 @@ export default function Trash({ id, onDelete }) {
     
     if (confirm('¿Estás seguro de eliminar este evento?')) {
       try {
-        const response = await fetch(`http://localhost:3000/eventos/${id}`, {
+        const response = await fetch(`/api/eventos/${id}`, {
           method: 'DELETE',
         });
         if (response.ok) {

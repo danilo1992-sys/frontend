@@ -23,6 +23,9 @@ importers:
       '@formkit/tempo':
         specifier: ^1.0.0
         version: 1.0.0
+      '@nanostores/react':
+        specifier: ^1.1.0
+        version: 1.1.0(nanostores@1.4.0)(react@19.2.5)
       '@tailwindcss/vite':
         specifier: ^4.2.2
         version: 4.2.2(vite@7.3.2(jiti@2.6.1)(lightningcss@1.32.0))
@@ -35,17 +38,26 @@ importers:
       astro:
         specifier: ^6.1.5
         version: 6.1.5(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)
+      cookie:
+        specifier: 0.6.0
+        version: 0.6.0
+      cors:
+        specifier: ^2.8.6
+        version: 2.8.6
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
       fullcalendar:
         specifier: ^6.1.20
         version: 6.1.20
+      nanostores:
+        specifier: ^1.4.0
+        version: 1.4.0
       react:
-        specifier: ^19.2.4
+        specifier: ^19.2.5
         version: 19.2.5
       react-dom:
-        specifier: ^19.2.4
+        specifier: ^19.2.5
         version: 19.2.5(react@19.2.5)
       tailwindcss:
         specifier: ^4.2.2
@@ -588,6 +600,13 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
+  '@nanostores/react@1.1.0':
+    resolution: {integrity: sha512-MbH35fjhcf7LAubYX5vhOChYUfTLzNLqH/mBGLVsHkcvjy0F8crO1WQwdmQ2xKbAmtpalDa2zBt3Hlg5kqr8iw==}
+    engines: {node: ^20.0.0 || >=22.0.0}
+    peerDependencies:
+      nanostores: ^1.2.0
+      react: '>=18.0.0'
+
   '@oslojs/encoding@1.1.0':
     resolution: {integrity: sha512-70wQhgYmndg4GCPxPPxPGevRKqTIJ2Nh4OkiMWmDAVYsTQ+Ta7Sq+rPevXyXGdzr30/qZBnyOalCszoMxlyldQ==}
 
@@ -921,6 +940,7 @@ packages:
 
   '@ungap/structured-clone@1.3.0':
     resolution: {integrity: sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==}
+    deprecated: Potential CWE-502 - Update to 1.3.1 or higher
 
   '@vitejs/plugin-react@5.2.0':
     resolution: {integrity: sha512-YmKkfhOAi3wsB1PhJq5Scj3GXMn3WvtQ/JC0xoopuHoXSdmtdStOpFrYaT1kie2YgFBcIe64ROzMYRjCrYOdYw==}
@@ -1018,6 +1038,10 @@ packages:
   cookie@1.1.1:
     resolution: {integrity: sha512-ei8Aos7ja0weRpFzJnEA9UHJ/7XQmqglbRwnf2ATjcB9Wq874VKH9kfjjirM6UhU2/E5fFYadylyhFldcqSidQ==}
     engines: {node: '>=18'}
+
+  cors@2.8.6:
+    resolution: {integrity: sha512-tJtZBBHA6vjIAaF6EnIaq6laBBP9aq/Y3ouVJjEfoHbRBcHBAHYcMh/w8LDrk2PvIMMq8gmopa5D4V8RmbrxGw==}
+    engines: {node: '>= 0.10'}
 
   crossws@0.3.5:
     resolution: {integrity: sha512-ojKiDvcmByhwa8YYqbQI/hg7MEU0NC03+pSdEq4ZUnZR9xXpwk7E43SMNGkn+JxJGPFtNvQ48+vV2p+P1ml5PA==}
@@ -1570,6 +1594,10 @@ packages:
     resolution: {integrity: sha512-kNZ9xnoJYKg/AfxjrVL4SS0fKX++4awQReGqWnwTRHxeHGZ1FJFVgTqr/eMrNQdp0Tz7M7tG/TDaX8QfHDwVCw==}
     engines: {node: ^20.0.0 || >=22.0.0}
 
+  nanostores@1.4.0:
+    resolution: {integrity: sha512-i0tloweeudshAEuddpDxcg9Ik6pkPfVsHIgKyf143JrgG7/MOh0+q7BypdLXZPoOP7fOYt1eTcwGkyiVmhJFkA==}
+    engines: {node: ^20.0.0 || >=22.0.0}
+
   neotraverse@0.6.18:
     resolution: {integrity: sha512-Z4SmBUweYa09+o6pG+eASabEpP6QkQ70yHj351pQoEXIs8uHbaU2DWVmzBANKgflPa47A50PtB2+NgRpQvr7vA==}
     engines: {node: '>= 10'}
@@ -1595,6 +1623,10 @@ packages:
 
   oauth4webapi@2.17.0:
     resolution: {integrity: sha512-lbC0Z7uzAFNFyzEYRIC+pkSVvDHJTbEW+dYlSBAlCYDe6RxUkJ26bClhk8ocBZip1wfI9uKTe0fm4Ib4RHn6uQ==}
+
+  object-assign@4.1.1:
+    resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
+    engines: {node: '>=0.10.0'}
 
   obug@2.1.1:
     resolution: {integrity: sha512-uTqF9MuPraAQ+IsnPf366RG4cP9RtUi7MLO1N3KEc+wb0a6yKpeL0lmk2IB1jY5KHPAlTc6T/JRdC/YqxHNwkQ==}
@@ -1854,6 +1886,7 @@ packages:
   tsconfck@3.1.6:
     resolution: {integrity: sha512-ks6Vjr/jEw0P1gmOVwutM3B7fWxoWBL2KRDb1JfqGVawBmO5UsvmWOQFGHBPl5yxYz4eERr19E6L7NMv+Fej4w==}
     engines: {node: ^18 || >=20}
+    deprecated: unmaintained
     hasBin: true
     peerDependencies:
       typescript: ^5.0.0
@@ -1973,6 +2006,10 @@ packages:
     hasBin: true
     peerDependencies:
       browserslist: '>= 4.21.0'
+
+  vary@1.1.2:
+    resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
+    engines: {node: '>= 0.8'}
 
   vfile-location@5.0.3:
     resolution: {integrity: sha512-5yXvWDEgqeiYiBe1lbxYF7UMAIm/IcopxMHrMQDq3nvKcjPKIhZklUKL+AE7J7uApI4kwe2snsK+eI6UTj9EHg==}
@@ -2567,6 +2604,11 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
+  '@nanostores/react@1.1.0(nanostores@1.4.0)(react@19.2.5)':
+    dependencies:
+      nanostores: 1.4.0
+      react: 19.2.5
+
   '@oslojs/encoding@1.1.0': {}
 
   '@panva/hkdf@1.2.1': {}
@@ -2986,6 +3028,11 @@ snapshots:
   cookie@0.6.0: {}
 
   cookie@1.1.1: {}
+
+  cors@2.8.6:
+    dependencies:
+      object-assign: 4.1.1
+      vary: 1.1.2
 
   crossws@0.3.5:
     dependencies:
@@ -3724,6 +3771,8 @@ snapshots:
 
   nanostores@1.0.1: {}
 
+  nanostores@1.4.0: {}
+
   neotraverse@0.6.18: {}
 
   nlcst-to-string@4.0.0:
@@ -3743,6 +3792,8 @@ snapshots:
       boolbase: 1.0.0
 
   oauth4webapi@2.17.0: {}
+
+  object-assign@4.1.1: {}
 
   obug@2.1.1: {}
 
@@ -4176,6 +4227,8 @@ snapshots:
       browserslist: 4.28.2
       escalade: 3.2.0
       picocolors: 1.1.1
+
+  vary@1.1.2: {}
 
   vfile-location@5.0.3:
     dependencies:

@@ -1,8 +1,46 @@
 ---
 import Card from '../components/Card.jsx';
 import Layout from '../layouts/Layout.astro';
+import { SignInButton, SignUpButton } from '@clerk/astro/components';
 ---
 
 <Layout>
-  <Card client:load />
+  <div id="auth-gate" transition:animate="fade">
+    <div id="login-view" class="flex flex-col items-center justify-center min-h-[80vh] gap-6">
+      <div class="text-center">
+        <h1 class="text-4xl font-bold mb-2" style="color: var(--spotify-green)">Bienvenido</h1>
+        <p class="text-lg" style="color: var(--spotify-gray)">Inicia sesión para continuar</p>
+      </div>
+      <div class="flex flex-col gap-3 w-64">
+        <SignInButton mode="modal" />
+        <SignUpButton mode="modal" />
+      </div>
+    </div>
+    <div id="content-view" class="hidden">
+      <Card client:load />
+    </div>
+  </div>
+
+  <script>
+    import { $authStore } from '@clerk/astro/client';
+
+    function updateView() {
+      const auth = $authStore.get();
+      const loginView = document.getElementById('login-view');
+      const contentView = document.getElementById('content-view');
+
+      if (!loginView || !contentView) return;
+
+      if (auth?.userId) {
+        loginView.classList.add('hidden');
+        contentView.classList.remove('hidden');
+      } else {
+        loginView.classList.remove('hidden');
+        contentView.classList.add('hidden');
+      }
+    }
+
+    $authStore.subscribe(updateView);
+    updateView();
+  </script>
 </Layout>

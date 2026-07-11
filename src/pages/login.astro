@@ -1,14 +1,26 @@
 ---
-import SignedOut from "@clerk/astro";
 import AuthLayouts from "../layouts/AuthLayout.astro";
+import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/astro/components";
 ---
 
 <AuthLayouts>
-    <SignedOut>
-        <div class="mt-12">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Iniciar sesión
-            </button>
+    <Show when="signed-out">
+        <div class="flex flex-col items-center justify-center min-h-screen gap-6">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold mb-2" style="color: var(--spotify-green)">Bienvenido</h1>
+                <p class="text-lg" style="color: var(--spotify-gray)">Inicia sesión para continuar</p>
+            </div>
+            <div class="flex flex-col gap-3 w-64">
+                <SignInButton mode="modal" />
+                <SignUpButton mode="modal" />
+            </div>
         </div>
-    </SignedOut>
+    </Show>
+
+    <Show when="signed-in">
+        <div class="flex flex-col items-center justify-center min-h-screen gap-6">
+            <p style="color: var(--spotify-gray)">Ya tienes una sesión activa</p>
+            <UserButton />
+        </div>
+    </Show>
 </AuthLayouts>

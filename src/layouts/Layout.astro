@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css"
 import Sidebar from '../components/Sidebar.tsx';
+import { ClientRouter } from "astro:transitions";
 ---
 
 <!doctype html>
@@ -11,12 +12,15 @@ import Sidebar from '../components/Sidebar.tsx';
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content="Astro generator" />
-		<title>Astro Basics</title>
+    <title>Astro Basics</title>
+    <ClientRouter />
 	</head>
 	<body class="w-fit">
 		<div class="flex">
-			<Sidebar client:load />
-			<div class="flex-1 p-6">
+			<div transition:persist="sidebar">
+				<Sidebar client:load />
+			</div>
+			<div class="flex-1 p-6" transition:animate="fade">
 				<slot />
 			</div>
 		</div>

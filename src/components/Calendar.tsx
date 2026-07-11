@@ -15,7 +15,7 @@ export default function Calendar() {
   const [selectedEvent, setSelectedEvent] = useState<Evento | null>(null);
 
   useEffect(() => {
-    fetch("http://localhost:3000/eventos")
+    fetch("/api/eventos")
       .then((res) => res.json())
       .then((data) => {
         setEvents(data);

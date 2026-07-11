@@ -1,0 +1,10 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProfileCard from '../components/ProfileCard.tsx';
+---
+
+<Layout>
+    <div transition:animate="slide">
+        <ProfileCard client:load />
+    </div>
+</Layout>
